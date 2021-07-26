@@ -3,11 +3,10 @@ pipeline {
     stages {
         stage('Build image') {
             steps {
-                echo 'Starting to build docker image'
-                script {
-                    def customImage = docker.build("imanton2/hello-world:0.1")
-                    customImage.push()
-                }
+                bat '''
+                 docker run -p 80:80 hello-world:0.1
+                 docker build . -t imanton2/hello-world:0.1
+                    '''
             }
         }
     }
