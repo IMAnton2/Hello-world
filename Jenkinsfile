@@ -1,16 +1,13 @@
 pipeline {
     agent any
-
     stages {
-        stage("build") {
+        stage('Build image') {
             steps {
-              echo 'build app!'
-            }
-        }
-
-        stage("deploy") {
-            steps {
-              echo 'deploy app!'
+                echo 'Starting to build docker image'
+                script {
+                    def customImage = docker.build("imanton2/hello-world:0.1")
+                    customImage.push()
+                }
             }
         }
     }
